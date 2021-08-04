@@ -1,6 +1,6 @@
-import FeedMe from '..';
-import fs     from 'fs';
-import path   from 'path';
+import FeedMe from '../src/feedme';
+import fs from 'fs';
+import path from 'path';
 import assert from 'assert';
 
 

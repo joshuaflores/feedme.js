@@ -80,7 +80,7 @@ export default class JSONFeedParser extends Writable implements Parser {
       feedJustFound = false;
       (this._currObj as JSONObject)[this._currKey] = value;
       if (stack.length === 1) {
-        parser.emit(this._currKey as string, value);
+        this.emit(this._currKey as string, value);
         if (!buffer) { delete (this._currObj as JSONObject)[this._currKey as string]; }
       }
       if (inArray) {
@@ -120,7 +120,7 @@ export default class JSONFeedParser extends Writable implements Parser {
 
       // Emit key in feed if curr is parent.
       if (stack.length === 1) {
-        parser.emit(`${this._currKey}`, currObj[this._currKey]);
+        this.emit(`${this._currKey}`, currObj[this._currKey]);
         if (!buffer) { delete currObj[this._currKey]; }
 
         // Or parent is array.
@@ -131,7 +131,7 @@ export default class JSONFeedParser extends Writable implements Parser {
           let event = key === 'entry' || key === 'items' ?
             'item' : stack[1].key as string;
           let data = currArr[this._currKey as number];
-          parser.emit(event, data);
+          this.emit(event, data);
           if (!buffer) { currArr.splice(this._currKey as number, 1); }
         }
 

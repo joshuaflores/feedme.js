@@ -62,8 +62,8 @@ const trimIndent = (str: string) => {
 
   // The last line should be indented and only contain whitespace.
   if (split.length > 1 &&
-     (rs = /^((?: {3})+|(?: {2})+|(?: {4})+|(?:\t)+)$/m.exec(
-       split[split.length - 1]))) {
+    (rs = /^((?: {3})+|(?: {2})+|(?: {4})+|(?:\t)+)$/m.exec(
+      split[split.length - 1]))) {
 
     // The very first line should be empty.
     if (split.shift() !== '') {
@@ -120,7 +120,7 @@ export default class XMLFeedParser extends Writable implements Parser {
         if (node.name === 'feed') {
           let type = 'atom';
           this._root.type = type;
-          parser.emit('type', type);
+          this.emit('type', type);
         }
         parser.removeListener('opentag', openf1);
         parser.on('text', ontext);
@@ -131,10 +131,10 @@ export default class XMLFeedParser extends Writable implements Parser {
       } else if (node.name === 'rss' || node.name === 'rdf:rdf') {
         let type = 'rss ' + (node.attributes.version || '1.0');
         this._root.type = type;
-        parser.emit('type', type);
+        this.emit('type', type);
       } else {
         parser.removeListener('opentag', openf1);
-        parser.emit('error', new Error('Feed type not recognized'));
+        this.emit('error', new Error('Feed type not recognized'));
         // parser.closed = true;
       }
     };
@@ -185,7 +185,7 @@ export default class XMLFeedParser extends Writable implements Parser {
         // Some feeds will contain a summary of items at the top.
         // Ignore this.
         if (key !== 'items' || Array.isArray(data)) {
-          parser.emit(skey, data);
+          this.emit(skey, data);
           if (!this._buffer) { delete this._obj[key]; }
         }
       }
@@ -216,7 +216,7 @@ export default class XMLFeedParser extends Writable implements Parser {
     } else {
       items = [];
     }
-    if (!Array.isArray(items)){
+    if (!Array.isArray(items)) {
       items = [items];
     }
     this._root.items = items;

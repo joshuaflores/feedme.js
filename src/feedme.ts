@@ -21,14 +21,9 @@ export default class FeedMe extends Writable {
   }
 
   _proxyEvents() {
-    const parserEmit = this._parser.parser.emit;
-    this._parser.parser.emit = (event: string | symbol, ...args: any[]): boolean => {
-      parserEmit.apply(this._parser.parser, [event, ...args]);
-      if (event !== 'error') {
-        this.emit('*', event, args);
-        return this.emit(event, ...args);
-      }
-      return true;
+    this._parser.emit = (event: string | symbol, ...args: any[]): boolean => {
+      this.emit('*', event, args);
+      return this.emit(event, ...args);
     };
     this._parser.parser.on('error', this.emit.bind(this, 'error'));
   }

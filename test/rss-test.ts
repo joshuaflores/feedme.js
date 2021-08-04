@@ -1,6 +1,6 @@
-import FeedMe from '..';
-import fs     from 'fs';
-import path   from 'path';
+import FeedMe from '../src/feedme';
+import fs from 'fs';
+import path from 'path';
 import assert from 'assert';
 
 
@@ -17,7 +17,7 @@ const feed = {
   generator: 'Weblog Editor 2.0',
   managingeditor: 'editor@example.com',
   webmaster: 'webmaster@example.com',
-  items:  [
+  items: [
     {
       title: 'Star City',
       link: 'http://liftoff.msfc.nasa.gov/news/2003/news-starcity.asp',
@@ -28,19 +28,22 @@ const feed = {
     {
       description: 'Sky watchers in Europe, Asia, and parts of Alaska and Canada will experience a <a href="http://science.nasa.gov/headlines/y2003/30may_solareclipse.htm">partial eclipse of the Sun</a> on Saturday, May 31st.',
       pubdate: 'Fri, 30 May 2003 11:06:42 GMT',
-      guid: 'http://liftoff.msfc.nasa.gov/2003/05/30.html#item572'    },
+      guid: 'http://liftoff.msfc.nasa.gov/2003/05/30.html#item572'
+    },
     {
       title: 'The Engine That Does More',
       link: 'http://liftoff.msfc.nasa.gov/news/2003/news-VASIMR.asp',
       description: 'Before man travels to Mars, NASA hopes to design new engines that will let us fly through the Solar System more quickly.  The proposed VASIMR engine would do that.',
       pubdate: 'Tue, 27 May 2003 08:37:32 GMT',
-      guid: 'http://liftoff.msfc.nasa.gov/2003/05/27.html#item571'    },
+      guid: 'http://liftoff.msfc.nasa.gov/2003/05/27.html#item571'
+    },
     {
       title: 'Astronauts\' Dirty Laundry',
       link: 'http://liftoff.msfc.nasa.gov/news/2003/news-laundry.asp',
       description: '',
       pubdate: 'Tue, 20 May 2003 08:56:02 GMT',
-      guid: 'http://liftoff.msfc.nasa.gov/2003/05/20.html#item570'    }
+      guid: 'http://liftoff.msfc.nasa.gov/2003/05/20.html#item570'
+    }
   ]
 };
 

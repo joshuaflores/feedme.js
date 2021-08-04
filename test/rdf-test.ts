@@ -1,6 +1,6 @@
-import { default as FeedMe, Feed } from '..';
-import fs     from 'fs';
-import path   from 'path';
+import { default as FeedMe, Feed } from '../src/feedme';
+import fs from 'fs';
+import path from 'path';
 import assert from 'assert';
 
 
