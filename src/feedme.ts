@@ -22,7 +22,7 @@ export default class FeedMe extends Writable {
 
   _proxyEvents() {
     this._parser.emit = (event: string | symbol, ...args: any[]): boolean => {
-      this.emit('*', event, args);
+      this.emit('*', event, ...args);
       return this.emit(event, ...args);
     };
     this._parser.parser.on('error', this.emit.bind(this, 'error'));
