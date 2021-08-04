@@ -1,6 +1,6 @@
-import FeedMe from '..';
-import fs     from 'fs';
-import path   from 'path';
+import FeedMe from '../src/feedme';
+import fs from 'fs';
+import path from 'path';
 import assert from 'assert';
 
 
@@ -83,8 +83,15 @@ const feed = {
 describe('Parse an Atom file', () => {
   it('Events emitted match expected', (done) => {
     const parser = new FeedMe();
+    let wildCardEvents = 0;
     let events = 0;
     let items = 0;
+
+
+    parser.on('*', (event, _data) => {
+      assert(typeof event === 'string' || event instanceof String)
+      wildCardEvents++;
+    })
 
     parser.on('type', (data) => {
       assert.deepEqual(data, feed.type);
@@ -143,9 +150,12 @@ describe('Parse an Atom file', () => {
       items++;
     });
 
+
+
     fs.createReadStream(file).pipe(parser);
 
     parser.on('finish', () => {
+      assert(wildCardEvents >= events);
       assert.equal(events, 9);
       assert.equal(items, 1);
       assert.deepEqual(parser.done(), undefined);

@@ -25,12 +25,14 @@ export default class FeedMe extends Writable {
     this._parser.parser.emit = (event: string | symbol, ...args: any[]): boolean => {
       parserEmit.apply(this._parser.parser, [event, ...args]);
       if (event !== 'error') {
+        this.emit('*', event, args);
         return this.emit(event, ...args);
       }
       return true;
     };
     this._parser.parser.on('error', this.emit.bind(this, 'error'));
   }
+
 
   /**
    * @param {Buffer} data
